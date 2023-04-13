@@ -21,25 +21,27 @@
 </head>
 
 <body>
-    <header class="d-flex justify-content-center position-relative pt-5">
-        <div class="bookMarker mt-5 p-3 text-center position-relative">
-            <div class="head p-3 position-relative d-flex align-items-center flex-column">
-                <h1>Bookmarker</h1>
-                <p dir="rtl" class="position-absolute">احفظ مواقع الويب المفضلة لديك</p>
-            </div>
+    <header class="pt-5 position-relative">
+        <div class="container d-flex justify-content-center">
+            <div class="bookMarker mt-5 p-3 text-center position-relative">
+                <div class="head p-3 position-relative d-flex align-items-center flex-column">
+                    <h1>Bookmarker</h1>
+                    <p dir="rtl" class="position-absolute">احفظ مواقع الويب المفضلة لديك</p>
+                </div>
 
-            <div class="form-group py-2">
-                <label id="site-name-label" for="site-name" class="position-relative">website name</label>
-                <input placeholder="???" class="d-block m-auto" id="site-name" type="text">
-            </div>
-            <div class="form-group py-2">
-                <label id="site-url-label" for="site-url" class="position-relative">website URL</label>
-                <input placeholder="???" class="d-block m-auto" id="site-url" type="text">
-            </div>
+                <div class="form-group py-2">
+                    <label id="site-name-label" for="site-name" class="position-relative">website name</label>
+                    <input placeholder="???" class="d-block m-auto" id="site-name" type="text">
+                </div>
+                <div class="form-group py-2">
+                    <label id="site-url-label" for="site-url" class="position-relative">website URL</label>
+                    <input placeholder="???" class="d-block m-auto" id="site-url" type="text">
+                </div>
 
-            <div class="add-btn-div mt-3 d-inline-block"><button id="add-btn">ADD</button></div>
-        </div>
-        <div class="spans position-absolute overflow-hidden w-100">
+                <div class="add-btn-div mt-3 d-inline-block"><button id="add-btn">ADD</button></div>
+            </div>
+            <div class="spans position-absolute overflow-hidden w-100">
+            </div>
         </div>
     </header>
 
@@ -52,7 +54,7 @@
                 </div>
                 <div dir="rtl" class="col-md-6 d-flex justify-content-center justify-content-md-start">
                     <div class="delete-btn-div">
-                    <button id="delete-btn">هل تريد حذف موقع ؟</button>
+                        <button id="delete-btn">هل تريد حذف موقع ؟</button>
                     </div>
                 </div>
             </div>
@@ -60,20 +62,23 @@
                 <img src="imgs/empty-section.gif" alt="empty-section">
             </div>
         </div>
-        
-        <div id="delete-overlay" class="position-fixed rounded-circle w-100 d-none justify-content-center align-items-start">
+
+        <div id="delete-overlay"
+            class="position-fixed rounded-circle w-100 d-none justify-content-center align-items-start">
             <div id="delete-box" class="p-3 position-relative">
-                <button id="close-delete-box" class="rounded-circle d-flex justify-content-center align-items-center position-absolute me-3">
+                <button id="close-delete-box"
+                    class="rounded-circle d-flex justify-content-center align-items-center position-absolute me-3">
                     <i class="fas fa-times"></i>
                 </button>
                 <h3 class="text-danger">Delete</h3>
-                <p>enter the <span>index number</span> of the website you want to delete, or enter <span>number zero</span> to delete all </p>
+                <p>enter the <span>index number</span> of the website you want to delete, or enter <span>number
+                        zero</span> to delete all </p>
                 <input id="delete-box-input" type="number">
                 <p id="delete-box-error" class="text-danger"></p>
                 <div class="confirm-btn-div mt-3 mx-auto"><button id="confirm-btn">delete</button></div>
             </div>
         </div>
-       
+
         <span dir="rtl" class="moataz position-absolute px-5">معتز بالله حسن</span>
     </section>
 
