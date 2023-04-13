@@ -1,0 +1,311 @@
+body {
+    font-family: 'Source Code Pro', monospace;
+    background-color: #6961FF;
+    overflow-x: hidden;
+}
+
+header p,
+#delete-btn {
+    font-family: 'Noto Nastaliq Urdu', serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+header .bookMarker {
+    z-index: 3;
+    flex-grow: 1;
+    max-width: 768px;
+    border-radius: 1rem;
+    border: 5px solid #97e8e6;
+    background-color: #97e8e6;
+    box-shadow: #000 -10px 10px;
+}
+
+header input {
+    background-color: #FFFCF2;
+    padding: 7px 10px;
+    width: 84%;
+    border-radius: .275rem;
+    font-size: 1rem;
+}
+
+
+header #site-name {
+    background-color: #6961FF;
+    border: 3px solid #000;
+    box-shadow: #000 -7px 7px;
+}
+
+header #site-url {
+    background-color: #fff;
+    border: 3px solid #000;
+    box-shadow: #000 -7px 7px;
+    color: #6961FF;
+}
+
+header #site-name::placeholder {
+    color: #000;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+header #site-url::placeholder {
+    color: #6961FF;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+header input:focus {
+    outline-style: none;
+}
+
+
+header .bookMarker h1 {
+    font-size: 3rem;
+    letter-spacing: 3px;
+    color: #6961FF;
+}
+
+header .bookMarker .head p {
+    margin: 0;
+    bottom: 0;
+    transform: translateY(-60%);
+}
+
+header label {
+    font-size: 1.2rem;
+}
+
+header .add-btn-div {
+    border-radius: .225rem;
+    background-color: #000;
+}
+
+header #add-btn {
+    border: 2px solid #000;
+    transform: translate(5px, -5px);
+    background-color: #6961FF;
+    padding: 3px 15px;
+    border-radius: .225rem;
+}
+
+#add-btn:hover,
+#delete-btn:hover,
+#confirm-btn:hover {
+    font-weight: 600;
+}
+
+#add-btn:active,
+#delete-btn:active,
+#confirm-btn:active {
+    transform: translate(0, 0);
+}
+
+#display {
+    background-color: #fdfa44;
+}
+
+#display::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #fdfa44;
+    transform: skew(0, -4deg);
+    transform-origin: left;
+    z-index: -1;
+}
+
+
+#display::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background-color: #fdfa44;
+    transform: skew(0, -4deg);
+    transform-origin: right;
+    z-index: -1;
+}
+
+
+#display .spans span,
+header .spans span {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-size: 900;
+}
+
+.spans {
+    left: 0;
+    transform: skew(0, -4deg);
+    transform-origin: left;
+    white-space: nowrap;
+}
+
+header .spans {
+    bottom: 0;
+    color: #fdfa44;
+}
+
+#display .spans {
+    top: 0;
+    color: #6961FF;
+}
+
+#display .link {
+    background-color: #000;
+    border-radius: .275rem;
+}
+
+#display img {
+    width: 200px;
+}
+
+#display .website .link a {
+    padding: 8px 0;
+    color: #000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: .275rem;
+    border: 3px solid #000;
+    transform: translate(7px, -7px);
+}
+
+#display .website .link a:active {
+    transform: translate(0, 0);
+}
+
+
+#display .delete-btn-div,
+.confirm-btn-div {
+    background-color: #000;
+    border-radius: .275rem;
+    width: fit-content;
+    height: fit-content;
+}
+
+#delete-btn {
+    border: 2px solid #000;
+    transform: translate(5px, -5px);
+    background-color: #6961FF;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: .225rem;
+    display: none;
+}
+
+
+.moataz {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    right: 0;
+    bottom: 0;
+    transform: skew(0, -4deg) translateY(100%);
+    transform-origin: right;
+    white-space: nowrap;
+    font-size: 1.3rem;
+    color: #fdfa44;
+}
+
+#delete-overlay {
+    background-color: rgba(0, 0, 0, .7);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(0);
+    opacity: 0;
+    z-index: 999;
+    transition: .2s;
+}
+
+#delete-box {
+    max-width: 500px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 3px solid #000;
+    box-shadow: #000 -7px 7px;
+    margin-top: 20px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .2s;
+}
+
+#delete-box input {
+    border: 1px solid #000;
+    outline: none;
+    border-radius: .275rem;
+    width: 100%;
+}
+
+#delete-box p span {
+    background-color: #6961FF;
+    color: #fff;
+    padding: 0 5px;
+    font-weight: 600;
+    border-radius: .275rem;
+}
+
+#confirm-btn {
+    border: 2px solid #000;
+    transform: translate(5px, -5px);
+    background-color: #dc3545;
+    outline: none;
+    padding: 7px 15px;
+    border-radius: .225rem;
+    color: #fff;
+}
+
+#close-delete-box {
+    background-color: #dc3545;
+    width: 27px;
+    height: 27px;
+    color: #fff;
+    right: 0;
+    border: 2px solid #000;
+    outline: none;
+    box-shadow: #000 -2px 2px;
+}
+
+@keyframes close {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    33.33% {
+        transform: rotate(25deg);
+    }
+
+    66.66% {
+        transform: rotate(-25deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes error{
+    0%{transform: translateX(-12px);}
+    25%{transform: translateX(12px);}
+    50%{transform: translateX(-12px);}
+    75%{transform: translateX(12px);}
+    100%{transform: translateX(0);}
+}
+
+.error-animation{
+    animation: error .4s;
+}
+
+#close-delete-box:hover i{
+    animation: close .4s;
+}
