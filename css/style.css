@@ -23,6 +23,10 @@ header .bookMarker {
     box-shadow: #000 -10px 10px;
 }
 
+@media screen and (max-width:768px) {
+    header .bookMarker{width: 95%;}
+}
+
 header input {
     background-color: #FFFCF2;
     padding: 7px 10px;
