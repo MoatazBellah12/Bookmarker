@@ -4,6 +4,10 @@ body {
     overflow-x: hidden;
 }
 
+.blocked-cursor:hover{cursor: not-allowed;}
+
+.invalid-input{background-color: #dc3545 !important;color: #fff !important;}
+
 header p,
 #delete-btn {
     font-family: 'Noto Nastaliq Urdu', serif;

@@ -19,7 +19,7 @@ if (localStorage.getItem('websites') != null) {
 }
 
 function urlValidation() {
-    const regex = /^(https?:\/\/)?(www.)?[A-Za-z0-9\-#@\-_]{5,50}(\.[A-Za-z0-9\-]{2,10}){1,5}$/
+    const regex = /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,25}){1,5}(?:\/.*)?$/
 
     if (regex.test(siteUrlInp.value)) {
         return true;
@@ -29,7 +29,7 @@ function urlValidation() {
 }
 
 function nameValidation() {
-    const regex = /^[A-Za-z0-9 \-_\.]{3,20}$/
+    const regex = /^[A-Za-z0-9 -_\.]{3,20}$/
     if (regex.test(siteNameInp.value)) {
         return true;
     } else {
@@ -37,29 +37,39 @@ function nameValidation() {
     }
 }
 
+function blockedCursorClass() {
+    if (addBtn.classList.contains('blocked-cursor') && nameValidation() && urlValidation())
+    { addBtn.classList.remove('blocked-cursor') }
+    else if(!addBtn.classList.contains('blocked-cursor') && !nameValidation() || !urlValidation()) 
+    { addBtn.classList.add('blocked-cursor') }
+}
+
 siteNameInp.addEventListener('keyup', function () {
+    blockedCursorClass();
     if (!nameValidation() && !siteNameLabel.innerHTML.includes('</i>')) {
-            siteNameLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
-            siteNameInp.classList.add('text-danger')
+        siteNameLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
+        siteNameInp.classList.add('invalid-input')
     } else if (nameValidation()) {
         siteNameLabel.innerHTML = siteNameLabel.innerHTML.replace('<i class="fas fa-exclamation mx-2 text-danger"></i>', '')
-        siteNameInp.classList.remove('text-danger')
+        siteNameInp.classList.remove('invalid-input')
     }
 
 })
 
 siteUrlInp.addEventListener('keyup', function () {
+    blockedCursorClass();
     if (!urlValidation() && !siteUrlLabel.innerHTML.includes('</i>')) {
         siteUrlLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
-        siteUrlInp.classList.add('text-danger')
+        siteUrlInp.classList.add('invalid-input')
     } else if (urlValidation()) {
         siteUrlLabel.innerHTML = siteUrlLabel.innerHTML.replace('<i class="fas fa-exclamation mx-2 text-danger"></i>', '')
-        siteUrlInp.classList.remove('text-danger')
+        siteUrlInp.classList.remove('invalid-input')
     }
+
 })
 
 addBtn.addEventListener('click', function () {
-
+    blockedCursorClass();
     if (urlValidation() && nameValidation()) {
         if (siteNameLabel.innerHTML.includes('</i>') || siteUrlLabel.innerHTML.includes('</i>')) {
             siteNameLabel.innerHTML = siteNameLabel.innerHTML.replace('<i class="fas fa-exclamation mx-2 text-danger"></i>', '')
@@ -72,12 +82,12 @@ addBtn.addEventListener('click', function () {
 
         if (!nameValidation() && !siteNameLabel.innerHTML.includes('</i>')) {
             siteNameLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
-            siteNameInp.classList.add('text-danger')
+            siteNameInp.classList.add('invalid-input')
         }
 
         if (!urlValidation() && !siteUrlLabel.innerHTML.includes('</i>')) {
             siteUrlLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
-            siteUrlInp.classList.add('text-danger')
+            siteUrlInp.classList.add('invalid-input')
         }
     }
 })
