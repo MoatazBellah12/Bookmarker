@@ -4,10 +4,13 @@ body {
     overflow-x: hidden;
 }
 
+*::selection{background-color: #fdfa44;color: #6961FF;}
+
 .blocked-cursor:hover{cursor: not-allowed;}
 
 .invalid-input{background-color: #dc3545 !important;color: #fff !important;}
 
+#web-number{color: #6961FF;font-weight: 600;}
 header p,
 #delete-btn {
     font-family: 'Noto Nastaliq Urdu', serif;

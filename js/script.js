@@ -18,6 +18,24 @@ if (localStorage.getItem('websites') != null) {
     websites = [];
 }
 
+function webCounter() {
+    webNumber = document.getElementById('web-number')
+    let counter = 0;
+    if (websites.length > 0) {
+        let x = setInterval(() => {
+            counter++
+            webNumber.innerHTML = counter
+            if (counter == websites.length) {
+                clearInterval(x)
+            }
+        }, 132);
+    } else {
+        webNumber.innerHTML = counter
+    }
+}
+webCounter();
+
+
 function urlValidation() {
     const regex = /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,25}){1,5}(?:\/.*)?$/
 
@@ -38,10 +56,8 @@ function nameValidation() {
 }
 
 function blockedCursorClass() {
-    if (addBtn.classList.contains('blocked-cursor') && nameValidation() && urlValidation())
-    { addBtn.classList.remove('blocked-cursor') }
-    else if(!addBtn.classList.contains('blocked-cursor') && !nameValidation() || !urlValidation()) 
-    { addBtn.classList.add('blocked-cursor') }
+    if (addBtn.classList.contains('blocked-cursor') && nameValidation() && urlValidation()) { addBtn.classList.remove('blocked-cursor') }
+    else if (!addBtn.classList.contains('blocked-cursor') && !nameValidation() || !urlValidation()) { addBtn.classList.add('blocked-cursor') }
 }
 
 siteNameInp.addEventListener('keyup', function () {
@@ -78,6 +94,7 @@ addBtn.addEventListener('click', function () {
         pushWebsite();
         display();
         clearInputs();
+        webCounter();
     } else {
 
         if (!nameValidation() && !siteNameLabel.innerHTML.includes('</i>')) {
@@ -119,17 +136,20 @@ deleteBoxBtn.addEventListener('click', function () {
         localStorage.setItem('websites', JSON.stringify(websites));
         hideDeleteOverlay();
         display();
+        webCounter();
     } else if (deleteBoxInput.value > 0 && deleteBoxInput.value <= websites.length) {
         websites.splice(deleteBoxInput.value - 1, 1);
         localStorage.setItem('websites', JSON.stringify(websites));
         hideDeleteOverlay();
         display();
+        webCounter();
     } else {
         deleteError.innerHTML = 'please enter an existent index number'
         let deleteBox = document.getElementById('delete-box')
         deleteBox.classList.add('error-animation')
         setTimeout(() => { deleteBox.classList.remove('error-animation') }, 400)
     }
+
 })
 
 deleteBtn.addEventListener('click', function () {
@@ -205,7 +225,8 @@ function checkUrl() {
 
 function clearInputs() {
     siteNameInp.value = '';
-    siteUrlInp.value = ''
+    siteUrlInp.value = '';
+    addBtn.classList.add('blocked-cursor')
 }
 
 function showDeleteOverlay() {
