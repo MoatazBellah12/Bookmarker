@@ -1,4 +1,5 @@
-let siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchors, spans, websites;
+let bookmarker, siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchors, spans, websites;
+bookmarker = document.querySelector('.bookMarker')
 siteNameInp = document.getElementById('site-name');
 siteUrlInp = document.getElementById('site-url');
 addBtn = document.getElementById('add-btn');
@@ -25,40 +26,18 @@ function webCounter() {
         let x = setInterval(() => {
             counter++
             webNumber.innerHTML = counter
-            if (counter == websites.length) {
-                clearInterval(x)
-            }
-        }, 132);
+            if (counter >= websites.length) { clearInterval(x) }
+        }, 90)
     } else {
         webNumber.innerHTML = counter
     }
 }
 webCounter();
 
-
-function urlValidation() {
-    const regex = /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,25}){1,5}(?:\/.*)?$/
-
-    if (regex.test(siteUrlInp.value)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function nameValidation() {
-    const regex = /^[A-Za-z0-9 -_\.]{3,20}$/
-    if (regex.test(siteNameInp.value)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function blockedCursorClass() {
-    if (addBtn.classList.contains('blocked-cursor') && nameValidation() && urlValidation()) { addBtn.classList.remove('blocked-cursor') }
-    else if (!addBtn.classList.contains('blocked-cursor') && !nameValidation() || !urlValidation()) { addBtn.classList.add('blocked-cursor') }
-}
+window.addEventListener('scroll', function () {
+    pixels = this.scrollY * -0.5
+    bookmarker.style.transform = `translateY(${pixels}px)`
+});
 
 siteNameInp.addEventListener('keyup', function () {
     blockedCursorClass();
@@ -173,6 +152,30 @@ function pushWebsite() {
     }
     websites.push(website)
     localStorage.setItem('websites', JSON.stringify(websites))
+}
+
+function urlValidation() {
+    const regex = /^(?:https?:\/\/)?(?:www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,25}){1,5}(?:\/.*)?$/
+
+    if (regex.test(siteUrlInp.value)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function nameValidation() {
+    const regex = /^[A-Za-z0-9 -_\.]{3,20}$/
+    if (regex.test(siteNameInp.value)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function blockedCursorClass() {
+    if (addBtn.classList.contains('blocked-cursor') && nameValidation() && urlValidation()) { addBtn.classList.remove('blocked-cursor') }
+    else if (!addBtn.classList.contains('blocked-cursor') && !nameValidation() || !urlValidation()) { addBtn.classList.add('blocked-cursor') }
 }
 
 function display() {
