@@ -40,7 +40,7 @@ function noteDisplay() {
     setTimeout(() => { note.style.transform = `translateY(0)` }, 10)
 
     const p = document.querySelector('#note p')
-    const txt = `Please note that the links you save on this website will be saved locally on your browser only. This means that if you switch to a different browser or device, you will not be able to access your saved links. To avoid losing your data, we recommend using the same browser and device each time you visit our website.`;
+    const txt = `Links saved here are only stored locally on your browser. Use the same browser and device to access them and keep your data.`;
     let i = 0;
     p.innerHTML = ``
     let x = setInterval(() => {
@@ -50,7 +50,7 @@ function noteDisplay() {
             clearInterval(x)
             close();
         }
-    }, 45)
+    }, 60)
 
     function close() {
         setTimeout(() => { note.style.transform = `translateY(125%)` }, 6000)
