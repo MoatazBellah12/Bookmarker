@@ -23,12 +23,14 @@ if (localStorage.getItem('websites') != null) {
 function webCounter() {
     webNumber = document.getElementById('web-number')
     let counter = 0;
+    let speed;
+    (websites.length > 20) ? speed = 90 : speed = 150;
     if (websites.length > 0) {
         let x = setInterval(() => {
             counter++
             webNumber.innerHTML = counter
             if (counter == websites.length) { clearInterval(x) }
-        }, 90)
+        }, speed)
     } else {
         webNumber.innerHTML = counter
     }
@@ -40,7 +42,7 @@ function noteDisplay() {
     setTimeout(() => { note.style.transform = `translateY(0)` }, 10)
 
     const p = document.querySelector('#note p')
-    const txt = `Links saved here are only stored locally on your browser. Use the same browser and device to access them and keep your data.`;
+    const txt = `Links saved here are only stored locally on your browser. Use the same browser/device to access and keep your data.`;
     let i = 0;
     p.innerHTML = ``
     let x = setInterval(() => {
@@ -50,7 +52,7 @@ function noteDisplay() {
             clearInterval(x)
             close();
         }
-    }, 60)
+    }, 75)
 
     function close() {
         setTimeout(() => { note.style.transform = `translateY(125%)` }, 6000)
