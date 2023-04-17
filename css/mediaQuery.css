@@ -1,0 +1,9 @@
+@media screen and (max-width:768px) {
+    header .bookMarker {
+        width: 95%;
+    }
+    #note{
+        width: 94%;
+        right: 3%;
+    }
+}

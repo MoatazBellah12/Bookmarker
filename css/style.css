@@ -4,13 +4,25 @@ body {
     overflow-x: hidden;
 }
 
-*::selection{background-color: #fdfa44;color: #6961FF;}
+*::selection {
+    background-color: #fdfa44;
+    color: #6961FF;
+}
 
-.blocked-cursor:hover{cursor: not-allowed;}
+.blocked-cursor:hover {
+    cursor: not-allowed;
+}
 
-.invalid-input{background-color: #dc3545 !important;color: #fff !important;}
+.invalid-input {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
 
-#web-number{color: #6961FF;font-weight: 600;}
+#web-number {
+    color: #6961FF;
+    font-weight: 600;
+}
+
 header p,
 #delete-btn {
     font-family: 'Noto Nastaliq Urdu', serif;
@@ -28,10 +40,6 @@ header .bookMarker {
     border: 5px solid #97e8e6;
     background-color: #97e8e6;
     box-shadow: #000 -10px 10px;
-}
-
-@media screen and (max-width:768px) {
-    header .bookMarker{width: 95%;}
 }
 
 header input {
@@ -311,18 +319,50 @@ header .spans {
     }
 }
 
-@keyframes error{
-    0%{transform: translateX(-12px);}
-    25%{transform: translateX(12px);}
-    50%{transform: translateX(-12px);}
-    75%{transform: translateX(12px);}
-    100%{transform: translateX(0);}
+@keyframes error {
+    0% {
+        transform: translateX(-12px);
+    }
+
+    25% {
+        transform: translateX(12px);
+    }
+
+    50% {
+        transform: translateX(-12px);
+    }
+
+    75% {
+        transform: translateX(12px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
-.error-animation{
+.error-animation {
     animation: error .4s;
 }
 
-#close-delete-box:hover i{
+#close-delete-box:hover i {
     animation: close .4s;
+}
+
+#note {
+    bottom: 25px;
+    right: 25px;
+    background-color: #fff;
+    width: 432px;
+    border: 2px solid #000;
+    box-shadow: #000 -7px 7px;
+    z-index: 99999;
+    transform: translateY(125%);
+    transition: transform 1s;
+    display: none;
+}
+
+#note h3 {
+    color: #6961FF;
+    font-weight: 600;
 }

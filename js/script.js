@@ -1,4 +1,4 @@
-let bookmarker, siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchors, spans, websites;
+let bookmarker, siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchors, spans, websites, note;
 bookmarker = document.querySelector('.bookMarker')
 siteNameInp = document.getElementById('site-name');
 siteUrlInp = document.getElementById('site-url');
@@ -11,6 +11,7 @@ siteUrlLabel = document.getElementById('site-url-label')
 siteNameLabel = document.getElementById('site-name-label')
 anchors = document.getElementsByTagName('a');
 spans = document.getElementsByClassName('spans');
+note = document.getElementById('note')
 
 if (localStorage.getItem('websites') != null) {
     websites = JSON.parse(localStorage.getItem('websites'))
@@ -26,13 +27,36 @@ function webCounter() {
         let x = setInterval(() => {
             counter++
             webNumber.innerHTML = counter
-            if (counter >= websites.length) { clearInterval(x) }
+            if (counter == websites.length) { clearInterval(x) }
         }, 90)
     } else {
         webNumber.innerHTML = counter
     }
 }
 webCounter();
+
+function noteDisplay() {
+    note.style.display = `block`
+    setTimeout(() => { note.style.transform = `translateY(0)` }, 10)
+
+    const p = document.querySelector('#note p')
+    const txt = `Please note that the links you save on this website will be saved locally on your browser only. This means that if you switch to a different browser or device, you will not be able to access your saved links. To avoid losing your data, we recommend using the same browser and device each time you visit our website.`;
+    let i = 0;
+    p.innerHTML = ``
+    let x = setInterval(() => {
+        p.innerHTML += txt.charAt(i)
+        i++
+        if (i == txt.length) {
+            clearInterval(x)
+            close();
+        }
+    }, 45)
+
+    function close() {
+        setTimeout(() => { note.style.transform = `translateY(125%)` }, 6000)
+        setTimeout(() => { note.style.display = `none` }, 7000)
+    }
+}
 
 window.addEventListener('scroll', function () {
     pixels = this.scrollY * -0.5
@@ -70,12 +94,12 @@ addBtn.addEventListener('click', function () {
             siteNameLabel.innerHTML = siteNameLabel.innerHTML.replace('<i class="fas fa-exclamation mx-2 text-danger"></i>', '')
             siteUrlLabel.innerHTML = siteUrlLabel.innerHTML.replace('<i class="fas fa-exclamation mx-2 text-danger"></i>', '')
         }
+        if (websites.length == 0) { noteDisplay(); }
         pushWebsite();
         display();
         clearInputs();
         webCounter();
     } else {
-
         if (!nameValidation() && !siteNameLabel.innerHTML.includes('</i>')) {
             siteNameLabel.innerHTML += '<i class="fas fa-exclamation mx-2 text-danger"></i>'
             siteNameInp.classList.add('invalid-input')
