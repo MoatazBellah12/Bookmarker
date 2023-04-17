@@ -87,6 +87,7 @@ header .bookMarker .head p {
 
 header label {
     font-size: 1.2rem;
+    white-space: nowrap;
 }
 
 header .add-btn-div {
@@ -175,15 +176,18 @@ header .spans {
     border-radius: .275rem;
 }
 
-#display img {
+#display .empty-section {
     width: 200px;
+    height: 155px;
+    background-image: url(../imgs/empty-section.gif);
+    background-size: cover;
+    background-position: center center;
 }
 
 #display .website .link a {
     padding: 8px 0;
     color: #000;
     white-space: nowrap;
-    text-overflow: ellipsis;
     text-decoration: none;
     background-color: #fff;
     border-radius: .275rem;
@@ -208,9 +212,11 @@ header .spans {
     border: 2px solid #000;
     transform: translate(5px, -5px);
     background-color: #6961FF;
+    color: #fdfa44;
     outline: none;
     padding: 7px 15px;
     border-radius: .225rem;
+    white-space: nowrap;
     display: none;
 }
 

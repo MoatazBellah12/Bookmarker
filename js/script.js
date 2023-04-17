@@ -148,7 +148,7 @@ function checkInputs() {
 function pushWebsite() {
     let website = {
         name: siteNameInp.value,
-        url: checkUrl()
+        url: checkUrl().toLowerCase()
     }
     websites.push(website)
     localStorage.setItem('websites', JSON.stringify(websites))
@@ -193,7 +193,7 @@ function display() {
         addAnchorsEvents();
         deleteBtn.style.display = 'block'
     } else {
-        websitesList.innerHTML = '<img src="imgs/empty-section.gif" alt="empty-section">';
+        websitesList.innerHTML = '<div class="empty-section"></div>';
         deleteBtn.style.display = 'none'
     }
 
