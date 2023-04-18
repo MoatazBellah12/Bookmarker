@@ -192,21 +192,37 @@ header .spans {
     background-position: center center;
 }
 
-#display .website .link a {
-    padding: 8px 0;
-    color: #000;
+#display .website .anchor-content a {
     white-space: nowrap;
     text-decoration: none;
-    background-color: #fff;
-    border-radius: .275rem;
-    border: 3px solid #000;
-    transform: translate(7px, -7px);
+    color: #000;
 }
 
-#display .website .link a:active {
+#display .website .anchor-content {
+    transform: translate(7px, -7px);
+    border: 3px solid #000;
+    background-color: #fff;
+    border-radius: .275rem;
+    cursor: pointer;
+}
+
+#display .website .anchor-content:active {
     transform: translate(0, 0);
 }
 
+#display .anchor-icon {
+    font-size: 1.1rem;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 7%;
+    background-color: rgba(255, 255, 255, .7);
+}
+
+#display .anchor-icon:hover i{
+    transform: scale(1.2) rotate(-15deg);
+}
 
 #display .delete-btn-div,
 .confirm-btn-div {

@@ -1,5 +1,4 @@
-let bookmarker, siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchors, spans, websites, note;
-bookmarker = document.querySelector('.bookMarker')
+let siteNameInp, siteUrlInp, addBtn, deleteBtn, deleteBoxInput, deleteBoxBtn, closeDeleteBox, siteUrlLabel, siteNameLabel, anchorContent, anchors, websites;
 siteNameInp = document.getElementById('site-name');
 siteUrlInp = document.getElementById('site-url');
 addBtn = document.getElementById('add-btn');
@@ -9,9 +8,9 @@ deleteBoxBtn = document.getElementById('confirm-btn');
 closeDeleteBox = document.getElementById('close-delete-box')
 siteUrlLabel = document.getElementById('site-url-label')
 siteNameLabel = document.getElementById('site-name-label')
+anchorContent = document.getElementsByClassName('anchor-content')
 anchors = document.getElementsByTagName('a');
-spans = document.getElementsByClassName('spans');
-note = document.getElementById('note')
+anchorIcon = document.getElementsByClassName('anchor-icon')
 
 if (localStorage.getItem('websites') != null) {
     websites = JSON.parse(localStorage.getItem('websites'))
@@ -38,6 +37,7 @@ function webCounter() {
 webCounter();
 
 function noteDisplay() {
+    let note = document.getElementById('note')
     note.style.display = `block`
     setTimeout(() => { note.style.transform = `translateY(0)` }, 10)
 
@@ -61,6 +61,7 @@ function noteDisplay() {
 }
 
 window.addEventListener('scroll', function () {
+    let bookmarker = document.querySelector('.bookMarker')
     pixels = this.scrollY * -0.5
     bookmarker.style.transform = `translateY(${pixels}px)`
 });
@@ -210,7 +211,7 @@ function display() {
     for (let i = 0; i < websites.length; i++) {
         webListContent += `
         <div class="website col-lg-4 col-md-6 p-2">
-                <div class="link"><a href="${websites[i].url}" target="_blank" class="d-flex justify-content-center align-items-center text-center overflow-hidden">${i + 1}.${websites[i].name}</a></div>
+                <div class="link"><div class="anchor-content d-flex justify-content-center align-items-center text-center overflow-hidden position-relative"><a href="${websites[i].url}" target="_blank" class="w-100 py-2">${i + 1}.${websites[i].name}</a><span class="anchor-icon position-absolute d-flex justify-content-center align-items-center"><i class="fas fa-share-alt"></i></span></div></div>
         </div>`
     }
 
@@ -238,7 +239,7 @@ function anchorsHover(webIndex) {
         }
     }
     typingEffect()
-    anchors[webIndex].addEventListener('pointerleave', function () {
+    anchorContent[webIndex].addEventListener('pointerleave', function () {
         clearTimeout(x)
         anchors[webIndex].innerHTML = `${webIndex + 1}.${websites[webIndex].name}`
     })
@@ -248,7 +249,7 @@ function checkUrl() {
     if (siteUrlInp.value.startsWith('http://') || siteUrlInp.value.startsWith('https://')) {
         return siteUrlInp.value
     } else {
-        return 'http://' + siteUrlInp.value
+        return 'https://' + siteUrlInp.value
     }
 }
 
@@ -285,13 +286,30 @@ function hideDeleteOverlay() {
 
 function addAnchorsEvents() {
     for (let i = 0; i < anchors.length; i++) {
-        anchors[i].addEventListener('pointerenter', function () {
+        anchorContent[i].addEventListener('pointerenter', function () {
             anchorsHover(i);
         })
+    };
+
+    if (navigator.share) {
+        for (let i = 0; i < anchorContent.length; i++) {
+            anchorIcon[i].addEventListener('click', async () => {
+                await navigator.share({
+                    title: websites[i].name,
+                    text: `Check out this awesome website!\n${websites[i].name}:`,
+                    url: websites[i].url
+                });
+            });
+        }
+    }else{
+        for(let i = 0; i < anchorContent.length; i++){
+            anchorIcon[i].style.display = `none !important`
+        }
     }
-};
+}
 
 (function () {
+    let spans = document.getElementsByClassName('spans');
     let span = ``
     for (let i = 0; i < 12; i++) {
         span += `<span>bookmarker</span> `
