@@ -23,7 +23,7 @@ function webCounter() {
     webNumber = document.getElementById('web-number')
     let counter = 0;
     let speed;
-    (websites.length > 20) ? speed = 90 : speed = 150;
+    (websites.length > 10) ? speed = 90 : speed = 150;
     if (websites.length > 0) {
         let x = setInterval(() => {
             counter++
@@ -207,15 +207,14 @@ function blockedCursorClass() {
 
 function display() {
     let websitesList = document.getElementById('websites-container')
-    webListContent = ``
-    for (let i = 0; i < websites.length; i++) {
-        webListContent += `
-        <div class="website col-lg-4 col-md-6 p-2">
-                <div class="link"><div class="anchor-content d-flex justify-content-center align-items-center text-center overflow-hidden position-relative"><a href="${websites[i].url}" target="_blank" class="w-100 py-2">${i + 1}.${websites[i].name}</a><span class="anchor-icon position-absolute d-flex justify-content-center align-items-center"><i class="fas fa-share-alt"></i></span></div></div>
-        </div>`
-    }
-
     if (websites.length != 0) {
+        webListContent = ``
+        for (let i = 0; i < websites.length; i++) {
+            webListContent += `
+        <div class="website col-lg-4 col-md-6 p-2">
+                <div class="link"><div class="anchor-content d-flex justify-content-center align-items-center text-center overflow-hidden position-relative"><a href="${websites[i].url}" target="_blank" class="w-100 py-2">${i + 1}.${websites[i].name}</a></div></div>
+        </div>`
+        }
         websitesList.innerHTML = webListContent;
         addAnchorsEvents();
         deleteBtn.style.display = 'block'
@@ -223,7 +222,6 @@ function display() {
         websitesList.innerHTML = '<div class="empty-section"></div>';
         deleteBtn.style.display = 'none'
     }
-
 }
 
 function anchorsHover(webIndex) {
@@ -249,7 +247,7 @@ function checkUrl() {
     if (siteUrlInp.value.startsWith('http://') || siteUrlInp.value.startsWith('https://')) {
         return siteUrlInp.value
     } else {
-        return 'https://' + siteUrlInp.value
+        return 'http://' + siteUrlInp.value
     }
 }
 
@@ -285,25 +283,20 @@ function hideDeleteOverlay() {
 }
 
 function addAnchorsEvents() {
-    for (let i = 0; i < anchors.length; i++) {
+    for (let i = 0; i < websites.length; i++) {
         anchorContent[i].addEventListener('pointerenter', function () {
             anchorsHover(i);
-        })
-    };
-
-    if (navigator.share) {
-        for (let i = 0; i < anchorContent.length; i++) {
+        });
+        if (navigator.share) {
+            anchorContent[i].innerHTML += `<span class="anchor-icon position-absolute d-flex justify-content-center align-items-center"><i class="fas fa-share-alt"></i></span>`
             anchorIcon[i].addEventListener('click', async () => {
                 await navigator.share({
                     title: websites[i].name,
-                    text: `Check out this awesome website!\n${websites[i].name}:`,
-                    url: websites[i].url
+                    text: `Check out this ${websites[i].name} website!\n:`,
+                    url: websites[i].url,
+                    footer: `--\nCheck out Bookmarker to save and organize your links at https://moatazbellah12.github.io/bookmarker/ 🚀`
                 });
             });
-        }
-    }else{
-        for(let i = 0; i < anchorContent.length; i++){
-            anchorIcon[i].style.display = `none !important`
         }
     }
 }
