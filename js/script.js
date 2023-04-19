@@ -283,6 +283,7 @@ function hideDeleteOverlay() {
 }
 
 function addAnchorsEvents() {
+    const myWeb = `https://moatazbellah12.github.io/bookmarker/`
     for (let i = 0; i < websites.length; i++) {
         anchorContent[i].addEventListener('pointerenter', function () {
             anchorsHover(i);
@@ -292,9 +293,8 @@ function addAnchorsEvents() {
             anchorIcon[i].addEventListener('click', async () => {
                 await navigator.share({
                     title: websites[i].name,
-                    text: `Check out this ${websites[i].name} website!\n:`,
                     url: websites[i].url,
-                    footer: `--\nCheck out Bookmarker to save and organize your links at https://moatazbellah12.github.io/bookmarker/ 🚀`
+                    text: `Check out this ${websites[i].name} website 🚀`
                 });
             });
         }
